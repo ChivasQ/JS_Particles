@@ -1,0 +1,22 @@
+body {
+	margin: 0%;
+	overflow: hidden;
+	background-color: rgb(20, 25, 45);
+}
+
+.unselectable {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+  }
+
+a {
+    font-family: arial;
+    padding: 9px;
+    text-decoration: none;
+    color: white;
+    position: fixed;
+    right: 50%;
+    transform: translate(50%, 0);
+}
