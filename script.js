@@ -1,5 +1,18 @@
 (() => {
     let width, height, mouse, lastTime;
+    c = 0;
+    const colors = [
+        `rgba(255, 0, 0, 1)`,
+        `rgba(0, 255, 0, 1)`,
+        `rgba(0, 0, 255, 1)`,
+        `rgba(255, 255, 0, 1)`,
+        `rgba(0, 255, 255, 1)`,
+        `rgba(255, 0, 255, 1)`,
+        `rgba(128, 0, 128, 1)`,
+        `rgba(255, 165, 0, 1)`,
+        `rgba(0, 128, 0, 1)`,
+        `rgba(128, 128, 128, 1)`,
+    ]
     
     const config = {
         dotMinRad   : 20,
@@ -32,6 +45,7 @@
             this.rad    = random(config.dotMinRad, config.dotMaxRad);
             this.mass   = this.rad * config.massFactor;
             this.color  = config.defColor;
+            this.lineColor  = nextColor();
         }
 
         draw() {
@@ -40,8 +54,6 @@
 
             if (this.pos.x + this.rad > width || this.pos.x - this.rad < 0) {this.vel.x *= -1;}
             if (this.pos.y + this.rad > height || this.pos.y - this.rad < 0) {this.vel.y *= -1;}
-
-
             
             fillText(this.text, this.pos.x, this.pos.y, config.font, `rgba(255, 255, 255, 0.9)`);
             createCircle(this.pos.x, this.pos.y, this.rad, true, this.color);
@@ -49,7 +61,7 @@
             for (let i = 0; i < this.connect.length; i++) {
                 const dot2 = getDotById(this.connect[i], dots);
                 if (dot2) {
-                    drawLine(this.pos.x, this.pos.y, dot2.pos.x, dot2.pos.y, `rgba(255, 255, 0, 1)`);
+                    drawLine(this.pos.x, this.pos.y, dot2.pos.x, dot2.pos.y, this.lineColor);
                 }
             }
         }
@@ -97,7 +109,7 @@
         ctx.fillStyle = color;
         ctx.font = `${size}px serif`;
         ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
+        ctx.textBaseline = "top";
 
         let lines = wrapText(text, config.textMaxLen);
 
@@ -113,8 +125,14 @@
         ctx.lineTo(x1, y1);
        
         ctx.stroke();
+    }
 
-        
+    function nextColor() {
+        if (c >= colors.length)
+            c = 0;
+        else
+            c++; 
+        return colors[c];
     }
     function wrapText(text, maxLength) {
         let words = text.split(' '); 
