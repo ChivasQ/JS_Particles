@@ -15,8 +15,8 @@
     ]
     
     const config = {
-        dotMinRad   : 20,
-        dotMaxRad   : 20,
+        dotMinRad   : 30,
+        dotMaxRad   : 30,
         spreadRad   : 100,
         massFactor  : 0.002,
         defColor    : `rgba(250, 10, 30, 0.9)`,
