@@ -1,18 +1,36 @@
+const api = "https://raw.githubusercontent.com/ChivasQ/JS_Particles/master/sample.json"
+const config = {
+    dotMinRad   : 1,
+    dotMaxRad   : 3,
+    spreadRad   : 100,
+    massFactor  : 0.002,
+    defColor    : `rgba(250, 10, 30, 0.9)`,
+    smooth      : 0.95,
+    effectRad   : 300,
+    mouseVelMul : 5
+}
+const TWO_PI = 2 * Math.PI;
+const canvas = document.querySelector("canvas");
+const ctx    = canvas.getContext('2d');
+const counter = document.getElementById("ParticleCount");
+const list = [];
+
+fetch(api)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);  // Посмотрите, что именно возвращает API
+        if (Array.isArray(data)) {  // Проверяем, является ли результат массивом
+            data.forEach(line => {
+                list.push(line);
+            });
+        } else {
+            console.error("API did not return an array.");
+        }
+    })
+console.log(list);
 (() => {
-    const config = {
-        dotMinRad   : 1,
-        dotMaxRad   : 3,
-        spreadRad   : 100,
-        massFactor  : 0.002,
-        defColor    : `rgba(250, 10, 30, 0.9)`,
-        smooth      : 0.95,
-        effectRad   : 300,
-        mouseVelMul : 5
-    }
-    const TWO_PI = 2 * Math.PI;
-    const canvas = document.querySelector("canvas");
-    const ctx    = canvas.getContext('2d');
-    const counter = document.getElementById("ParticleCount");
+
+
 
     let width, height, mouse, dots, lastTime;
 
