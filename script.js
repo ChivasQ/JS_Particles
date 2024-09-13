@@ -39,7 +39,6 @@
             }
 
             createCircle(this.pos.x, this.pos.y, this.rad, true, this.color);
-            createCircle(this.pos.x, this.pos.y, this.rad, false, config.defColor);
         }
     }
 
